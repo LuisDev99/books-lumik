@@ -25,7 +25,9 @@ namespace books_lumik
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize);
+            services.AddHttpContextAccessor();
+            services.AddDbContext<ShopOnlineDbContext>((s, o) => o.UseSqlite("Data source=data.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
