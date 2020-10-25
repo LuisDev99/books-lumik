@@ -22,7 +22,7 @@ namespace books_lumik.Infrastructure.Configurations
 
             builder.Property(x => x.CantidadCopias).IsRequired();
 
-            builder.Property(x => x.fechaPublicacion).IsRequired();
+            builder.Property(x => x.FechaPublicacion).IsRequired();
 
 
         }
