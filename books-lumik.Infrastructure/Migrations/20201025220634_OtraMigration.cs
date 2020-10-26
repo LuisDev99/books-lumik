@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace books_lumik.Infrastructure.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class OtraMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace books_lumik.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nombre = table.Column<string>(nullable: true),
+                    Nombre = table.Column<string>(nullable: false),
                     Edad = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -29,7 +29,7 @@ namespace books_lumik.Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     AutorId = table.Column<int>(nullable: false),
                     Nombre = table.Column<string>(nullable: false),
-                    fechaPublicacion = table.Column<DateTime>(nullable: false),
+                    FechaPublicacion = table.Column<DateTime>(nullable: false),
                     CantidadCopias = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

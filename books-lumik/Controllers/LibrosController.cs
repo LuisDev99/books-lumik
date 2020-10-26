@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using books_api.Core.Entities;
+using books_lumik.Infrastructure;
 using books_lumik.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,40 +14,118 @@ namespace books_lumik.Controllers
     [ApiController]
     public class LibrosController : ControllerBase
     {
-        // GET: api/<AuthorsController>
+        private readonly books_lumikDbContext _dbCxt;
+
+        public LibrosController(books_lumikDbContext dbCxt)
+        {
+            _dbCxt = dbCxt;
+        }
+
+        // GET: api/<LibrosController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<LibroDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_dbCxt.Libros.Select(libroDb => new LibroDto {
+                Id = libroDb.Id,
+                Nombre = libroDb.Nombre,
+                CantidadCopias = libroDb.CantidadCopias,
+                FechaPublicacion = libroDb.FechaPublicacion,
+            }));
         }
 
-        // GET api/<AuthorsController>/5
+        // GET api/<LibrosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<LibroDto> Get(int id)
         {
-            return "value";
+            var libroDb = _dbCxt.Libros.FirstOrDefault(libro => libro.Id == id);
+
+            if (libroDb == null)
+            {
+                return NotFound("Libro no existe");
+            }
+
+            return new LibroDto
+            {
+                Id = libroDb.Id,
+                Nombre = libroDb.Nombre,
+                CantidadCopias = libroDb.CantidadCopias,
+                FechaPublicacion = libroDb.FechaPublicacion,
+            };
         }
 
-        [HttpPost("prestar_libro")]
-        public ActionResult<IEnumerable<LibroDto>> PrestarLibro()
+        [HttpPost("{id}/prestar-libro")]
+        public ActionResult<IEnumerable<LibroDto>> PrestarLibro(int id)
         {
+            var libroDb = _dbCxt.Libros.FirstOrDefault(libro => libro.Id == id);            
 
-            return Ok("Esta bien");
+            if (libroDb == null)
+            {
+                return NotFound("Not Found");
+            }
+
+            if(libroDb.CantidadCopias > 3)
+            {
+                libroDb.CantidadCopias--;
+                _dbCxt.SaveChanges();
+
+                return Ok(new LibroDto {
+                    Id = libroDb.Id,
+                    Nombre = libroDb.Nombre,
+                    CantidadCopias = libroDb.CantidadCopias,
+                    FechaPublicacion = libroDb.FechaPublicacion,                  
+                });
+
+            } else
+            {                
+                return NotFound("No hay suficientes copias disponibles");
+            }
+
         }
 
 
-        [HttpPost("retornar_libro")]
-        public ActionResult<IEnumerable<LibroDto>> RetornarLibro()
+        [HttpPost("{id}/retornar-libro")]
+        public ActionResult<LibroDto> RetornarLibro(int id)
         {
+            var libroDb = _dbCxt.Libros.FirstOrDefault(libro => libro.Id == id);
 
-            return Ok("Esta bien");
+            if (libroDb == null)
+            {
+                return NotFound("Not Found");
+            }
+            
+            libroDb.CantidadCopias++;
+            _dbCxt.SaveChanges();
+
+            return Ok(new LibroDto
+            {
+                Id = libroDb.Id,
+                Nombre = libroDb.Nombre,
+                CantidadCopias = libroDb.CantidadCopias,
+                FechaPublicacion = libroDb.FechaPublicacion,
+            });
+            
         }
 
-        // POST api/<AuthorsController>
+        // POST api/<LibrosController>
         [HttpPost]
-        public void Post([FromBody] AñadirLibro nuevoAutor)
+        public ActionResult<LibroDto> Post([FromBody] AñadirLibro nuevoAutor)
         {
+            var autor = _dbCxt.Libros.Add(new Libro {
+                Nombre = nuevoAutor.Nombre,
+                AutorId = nuevoAutor.IdAutor,
+                CantidadCopias = nuevoAutor.CantidadCopias,
+            });
 
+
+            _dbCxt.SaveChanges();
+
+            return Ok(new LibroDto
+            {
+                Id = autor.Entity.Id,
+                Nombre = autor.Entity.Nombre,
+                CantidadCopias = autor.Entity.CantidadCopias,
+                FechaPublicacion = autor.Entity.FechaPublicacion,
+            });
         }
     }
 }

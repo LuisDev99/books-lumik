@@ -15,6 +15,10 @@ namespace books_lumik.Infrastructure.Configurations
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Edad).IsRequired();
+
+            builder.Property(x => x.Nombre).IsRequired();
+
             builder.Property(x=>x.Id).ValueGeneratedOnAdd();
 
             //builder.HasMany<Libro>(x => x.Libros);

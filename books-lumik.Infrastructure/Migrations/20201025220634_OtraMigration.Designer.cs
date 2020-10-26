@@ -9,8 +9,8 @@ using books_lumik.Infrastructure;
 namespace books_lumik.Infrastructure.Migrations
 {
     [DbContext(typeof(books_lumikDbContext))]
-    [Migration("20201025072036_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201025220634_OtraMigration")]
+    partial class OtraMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,7 @@ namespace books_lumik.Infrastructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -47,11 +48,11 @@ namespace books_lumik.Infrastructure.Migrations
                     b.Property<int>("CantidadCopias")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
+                    b.Property<DateTime>("FechaPublicacion")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("fechaPublicacion")
+                    b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

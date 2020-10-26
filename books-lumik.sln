@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "books-lumik.Api", "books-lumik\books-lumik.Api.csproj", "{53B6190A-B518-4BB3-8E62-A0E16B719159}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "books-lumik.Api", "books-lumik\books-lumik.Api.csproj", "{53B6190A-B518-4BB3-8E62-A0E16B719159}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "books-lumik.Core", "books-api.Core\books-lumik.Core.csproj", "{4D752F67-42D1-49E6-9356-0C9E2DA47043}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "books-lumik.Core", "books-api.Core\books-lumik.Core.csproj", "{4D752F67-42D1-49E6-9356-0C9E2DA47043}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "books-lumik.Infrastructure", "books-lumik.Infrastructure\books-lumik.Infrastructure.csproj", "{53A56F50-6F92-41D6-9DE4-F72B7E06DB70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "books-lumik.Infrastructure", "books-lumik.Infrastructure\books-lumik.Infrastructure.csproj", "{53A56F50-6F92-41D6-9DE4-F72B7E06DB70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

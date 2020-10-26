@@ -26,6 +26,7 @@ namespace books_lumik.Infrastructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

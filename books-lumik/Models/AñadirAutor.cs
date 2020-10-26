@@ -10,7 +10,5 @@ namespace books_lumik.Models
         public string Nombre { get; set; }
 
         public int Edad { get; set; }
-
-        public IEnumerable<LibroDto> Libros { get; set; }
     }
 }

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\books-api.Core\books-lumik.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

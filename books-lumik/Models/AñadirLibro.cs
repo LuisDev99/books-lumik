@@ -11,7 +11,7 @@ namespace books_lumik.Models
 
         public DateTime FechaPublicacion { get; set; }
 
-        public AutorDto Autor { get; set; }
+        public int IdAutor { get; set; }
 
         public int CantidadCopias { get; set; }
     }
